@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+	"name": "RSSTube",
+	"version": "0.1.2",
+        
+	"description": "Allows to subscribe to a YouTube channel with RSS feed by displaying the associated URL",
+	
+	"icons": {
+		"48": "icons/rsstube-48.png"
+	},
+	
+	"content_scripts": [
+		{
+			"matches": ["*://*.youtube.com/*"],
+			"js": ["rsstube.js"]
+		}
+	]
+}
