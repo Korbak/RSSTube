@@ -9,3 +9,5 @@ Ajoute un bouton sur les pages de YouTube qui permet de récupérer l'URL du flu
 <li>Un bouton permettant de récupérer le flux RSS de la chaîne apparaît en-dessous du bouton de YouTube</li>
 <li>Cliquer sur ce bouton affiche une pop-up contenant le lien ; copiez-le</li>
 <li>Importez ce lien dans votre lecteur de flux RSS favori</li></ul>
+
+Pour installer l'application, <a href="https://addons.mozilla.org/fr/firefox/addon/rsstube/" title="Installer l'extension Firefox">rendez-vous sur le store de Mozilla</a> !
