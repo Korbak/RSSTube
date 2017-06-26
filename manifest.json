@@ -1,18 +1,24 @@
 {
 	"manifest_version": 2,
 	"name": "RSSTube",
-	"version": "0.1.2",
+	"version": "1.1",
         
 	"description": "Allows to subscribe to a YouTube channel with RSS feed by displaying the associated URL",
-	
+	"homepage_url": "https://github.com/Korbak/RSSTube",	
 	"icons": {
 		"48": "icons/rsstube-48.png"
 	},
 	
+	"permissions": [
+		"activeTab"
+	],
+
 	"content_scripts": [
 		{
 			"matches": ["*://*.youtube.com/*"],
-			"js": ["rsstube.js"]
+			"js": ["jquery-3.2.1.min.js", "jquery.magnific-popup.js", "rsstube.js"],
+			"css": ["magnific-popup.css", "main.scss"],
+			"run_at": "document_idle"
 		}
 	]
 }
