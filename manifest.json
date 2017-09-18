@@ -1,9 +1,8 @@
 {
 	"manifest_version": 2,
-	"name": "RSSTube",
-	"version": "1.1",
-        
-	"description": "Allows to subscribe to a YouTube channel with RSS feed by displaying the associated URL",
+	"name": "__MSG_extensionName__",
+	"description": "__MSG_extensionDescription__",
+    "version": "1.2",
 	"homepage_url": "https://github.com/Korbak/RSSTube",	
 	"icons": {
 		"48": "icons/rsstube-48.png"
@@ -20,5 +19,7 @@
 			"css": ["magnific-popup.css", "main.scss"],
 			"run_at": "document_idle"
 		}
-	]
+	],
+
+    "default_locale": "en"
 }

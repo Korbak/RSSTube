@@ -15,7 +15,7 @@ $j(function () {
 	removalDelay: 300,
 	mainClass: 'my-mfp-zoom-in'
 	});
-        	
+
 	$j(document).on('click', '.popup-modal-dismiss', function (e) {
 		e.preventDefault();
 		$j.magnificPopup.close();
@@ -26,9 +26,9 @@ function copyToClipboardMsg(elem, msgElem) {
 	var succeed = copyToClipboard(elem);
 	var msg;
 	if (!succeed) {
-		msg = '<span style="color:red !important;">Échec de la copie - utilisez CTRL+C</span>';
+		msg = '<span style="color:red !important;">✖ Error</span>';
 	} else {
-	        msg = '<span style="color:green !important;">Le lien a été copié dans le presse-papier !</span>';
+	        msg = '<span style="color:green !important;">✔ OK</span>';
 	}
 	if (typeof msgElem === "string") {
 		msgElem = document.getElementById(msgElem);
@@ -56,7 +56,7 @@ function copyToClipboard(elem) {
     var currentFocus = document.activeElement;
     target.focus();
     target.setSelectionRange(0, target.value.length);
-    
+
     // copy the selection
     var succeed;
     try {
@@ -68,7 +68,7 @@ function copyToClipboard(elem) {
     if (currentFocus && typeof currentFocus.focus === "function") {
         currentFocus.focus();
     }
-    
+
     if (isInput) {
         // restore prior selection
         elem.setSelectionRange(origSelectionStart, origSelectionEnd);
@@ -80,7 +80,7 @@ function copyToClipboard(elem) {
 }
 
 // Getting the Channel ID
-var els = document.getElementsByTagName('meta'), i = 0, found1 = false, found2 = false,  channelId, channelName;
+var els = document.getElementsByTagName('meta'), i = 0, found1 = false, found2 = false,  channelId, channelName, hovercard;
 for(i; i < els.length; i++) {
 	prop = els[i].getAttribute('itemprop');
 
@@ -89,37 +89,40 @@ for(i; i < els.length; i++) {
 			channelId = els[i].getAttribute('content');
 			found1 = true;
 		}
-		else if(prop == 'name') {
-			channelName = els[i].getAttribute('content');
-			found2 = true;
-		}
-		if(found1 && found2) {
+		if(found1) {
 			break;
 		}
 	}
 }
 
+hovercard = document.getElementsByClassName('yt-user-info')[0];
+channelName = hovercard.innerText;
+
 // Generating RSS Button
 var rssButton = '<a class="popup-modal" href="#popup-content">';
-    rssButton = rssButton + '<button class="yt-uix-button yt-uix-button-size-default" style="margin-top: 5px; background-color:orange;" id="RSSTube" name="RSSTube" value="RSSTube">🔗 Voir le flux RSS</button>';
-    rssButton = rssButton + '</a>';
+    rssButton = rssButton + '<button class="yt-uix-button yt-uix-button-size-default" style="margin-top: 5px; background-color:orange;" id="RSSTube" name="RSSTube" value="RSSTube">';
+		rssButton = rssButton + browser.i18n.getMessage("buttonTitle");
+    rssButton = rssButton + '</button></a>';
 
 // Generate modal's content
-var contentPopup = '<div id="popup-content" class="mfp-hide white-popup-block zoom-anim-dialog">';
-    contentPopup = contentPopup + '<h1>Flux RSS de la chaîne ' + channelName + '</h1>';
-    contentPopup = contentPopup + '<p>Copiez ce lien dans votre lecteur RSS favori :</p>';
+var contentPopup = '<div id="popup-content" class="mfp-hide white-popup-block zoom-anim-dialog"><h1>';
+    contentPopup = contentPopup + browser.i18n.getMessage("modalTitle") + ' ' + channelName;
+		contentPopup = contentPopup + '</h1><p>';
+		contentPopup = contentPopup + browser.i18n.getMessage("modalSubtitle");
+		contentPopup = contentPopup + '</p>';
     contentPopup = contentPopup + '<p><input type="text" id="copyTarget" value="https://www.youtube.com/feeds/videos.xml?channel_id=' + channelId + '" /></p>';
     contentPopup = contentPopup + '<p id="msg"></p>';
-    contentPopup = contentPopup + '<button class="popup-modal-dismiss yt-uix-button yt-uix-button-size-default" style="margin-right: 10px; background-color:orange;" id="fermer" name="fermer" value="Fermer">Fermer</button>';
-    contentPopup = contentPopup + '<button id="copyButton" class="yt-uix-button yt-uix-button-size-default" style="margin-left: 10px; background-color:orange";" name="copyButton" value="Copier">Copier</button>';
-    contentPopup = contentPopup + '</div>';
+    contentPopup = contentPopup + '<button class="popup-modal-dismiss yt-uix-button yt-uix-button-size-default" style="margin-right: 10px; background-color:orange;" id="fermer" name="fermer" value="Fermer">';
+		contentPopup = contentPopup + browser.i18n.getMessage("buttonClose");
+    contentPopup = contentPopup + '</button><button id="copyButton" class="yt-uix-button yt-uix-button-size-default" style="margin-left: 10px; background-color:orange;" name="copyButton" value="Copier">';
+		contentPopup = contentPopup + browser.i18n.getMessage("buttonCopy");
+    contentPopup = contentPopup + '</button></div>';
 
 // Getting subscribe button
 var subscribeButton = document.getElementsByClassName('yt-uix-button-subscription-container')[0];
 
 // Inserting RSS Button
 subscribeButton.innerHTML = subscribeButton.innerHTML + rssButton + contentPopup;
-//document.body.innerHTML = document.body.innerHTML + contentPopup;
 
 // Inserting listeners
 document.getElementById("copyButton").addEventListener("click", function() {
