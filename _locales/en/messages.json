@@ -1,0 +1,36 @@
+{
+    "extensionName": {
+        "message": "RSSTube",
+        "description": "Name of the extension"
+    },
+
+    "extensionDescription": {
+        "message": "Allows to subscribe to a YouTube channel with RSS feed by displaying the associated URL thanks to an associated button",
+        "description": "Description of the extension"
+    },
+
+    "buttonTitle": {
+        "message": "🔗 See the RSS feed",
+        "description": "Principal button message"
+    },
+
+    "modalTitle": {
+        "message": "RSS feed from the channel",
+        "description": "Title of the modal"
+    },
+
+    "modalSubTitle": {
+        "message": "Copy the following link into your RSS reader :",
+        "description": "Subtitle of the modal"
+    },
+
+    "buttonCopy": {
+        "message": "Copy",
+        "description": "Text of the copy button"
+    },
+
+    "buttonClose": {
+        "message": "Close",
+        "description": "Text of the close button"
+    }
+}

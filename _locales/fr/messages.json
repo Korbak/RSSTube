@@ -1,0 +1,36 @@
+{
+    "extensionName": {
+        "message": "RSSTube",
+        "description": "Nom de l'extension"
+    },
+
+    "extensionDescription": {
+        "message": "Permet de s'abonner à une chaîne YouTube par flux RSS en affichant l'URL associée grâce à un bouton associé",
+        "description": "Description de l'extension"
+    },
+
+    "buttonTitle": {
+        "message": "🔗 Voir le flux RSS",
+        "description": "Message du bouton principal"
+    },
+
+    "modalTitle": {
+        "message": "Flux RSS de la chaîne",
+        "description": "Titre de la modale"
+    },
+
+    "modalSubTitle": {
+        "message": "Copiez ce lien dans votre lecteur RSS favori :",
+        "description": "Sous-titre de la modale"
+    },
+
+    "buttonCopy": {
+        "message": "Copier",
+        "description": "Texte du bouton copier"
+    },
+
+    "buttonClose": {
+        "message": "Fermer",
+        "description": "Texte du bouton fermer"
+    }
+}
