@@ -1,4 +1,5 @@
 var $j = jQuery.noConflict();
+var isNewVersion = new Boolean(false);
 
 // Modal's script
 $j(function () {
@@ -95,31 +96,63 @@ for(i; i < els.length; i++) {
 	}
 }
 
+if(channelId == null) {
+    channelId = document.getElementById('owner-name');
+    channelId = channelId.firstChild.getAttribute('href');
+    channelId = channelId.replace("/channel/","");
+    isNewVersion = true;
+}
+
+// Getting the Channel Name
 hovercard = document.getElementsByClassName('yt-user-info')[0];
+
+if(hovercard == null) {
+    hovercard = document.getElementById('owner-name');
+    isNewVersion = true;
+}
 channelName = hovercard.innerText;
 
 // Generating RSS Button
-var rssButton = '<a class="popup-modal" href="#popup-content">';
-    rssButton = rssButton + '<button class="yt-uix-button yt-uix-button-size-default" style="margin-top: 5px; background-color:orange;" id="RSSTube" name="RSSTube" value="RSSTube">';
-		rssButton = rssButton + browser.i18n.getMessage("buttonTitle");
+var rssButton = '<a class="popup-modal" href="#popup-content" style="text-decoration:none;">';
+
+if(isNewVersion == true) {
+    rssButton = rssButton + '<paper-button id="RSSTube" class="style-scope ytd-button-renderer style-destructive" role="button" tabindex="0" animated="" aria-disabled="false" elevation="0" style="background-color:orange; color:black;" >';
+    rssButton = rssButton + browser.i18n.getMessage("buttonTitle");
+    rssButton = rssButton + '</paper-button></a>';
+} else {
+    rssButton = rssButton + '<button class="style-scope ytd-button-renderer style-destructive yt-uix-button yt-uix-button-size-default" style="margin-top: 5px; background-color:orange;" id="RSSTube" name="RSSTube" value="RSSTube">';
+    rssButton = rssButton + browser.i18n.getMessage("buttonTitle");
     rssButton = rssButton + '</button></a>';
+}
 
 // Generate modal's content
 var contentPopup = '<div id="popup-content" class="mfp-hide white-popup-block zoom-anim-dialog"><h1>';
     contentPopup = contentPopup + browser.i18n.getMessage("modalTitle") + ' ' + channelName;
-		contentPopup = contentPopup + '</h1><p>';
-		contentPopup = contentPopup + browser.i18n.getMessage("modalSubtitle");
-		contentPopup = contentPopup + '</p>';
+	contentPopup = contentPopup + '</h1><p>';
+	contentPopup = contentPopup + browser.i18n.getMessage("modalSubtitle");
+	contentPopup = contentPopup + '</p>';
     contentPopup = contentPopup + '<p><input type="text" id="copyTarget" value="https://www.youtube.com/feeds/videos.xml?channel_id=' + channelId + '" /></p>';
     contentPopup = contentPopup + '<p id="msg"></p>';
+if(isNewVersion == true) {
+   contentPopup = contentPopup + '<paper-button id="copyButton" class="style-scope ytd-button-renderer style-destructive" role="button" tabindex="0" animated="" aria-disabled="false" elevation="0" style="background-color:orange; color:black;" name="copyButton" value="Copier">';
+    contentPopup = contentPopup + browser.i18n.getMessage("buttonCopy");
+    contentPopup = contentPopup + '</paper-button><paper-button class="popup-modal-dismiss style-scope ytd-button-renderer style-destructive" role="button" tabindex="0" animated="" aria-disabled="false" elevation="0" style="background-color:orange; color:black;" id="fermer" name="fermer" value="Fermer">';
+    contentPopup = contentPopup + browser.i18n.getMessage("buttonClose");
+    contentPopup = contentPopup + '</paper-button></div>';
+}
+else {
     contentPopup = contentPopup + '<button class="popup-modal-dismiss yt-uix-button yt-uix-button-size-default" style="margin-right: 10px; background-color:orange;" id="fermer" name="fermer" value="Fermer">';
-		contentPopup = contentPopup + browser.i18n.getMessage("buttonClose");
+	contentPopup = contentPopup + browser.i18n.getMessage("buttonClose");
     contentPopup = contentPopup + '</button><button id="copyButton" class="yt-uix-button yt-uix-button-size-default" style="margin-left: 10px; background-color:orange;" name="copyButton" value="Copier">';
-		contentPopup = contentPopup + browser.i18n.getMessage("buttonCopy");
+	contentPopup = contentPopup + browser.i18n.getMessage("buttonCopy");
     contentPopup = contentPopup + '</button></div>';
+}
 
 // Getting subscribe button
 var subscribeButton = document.getElementsByClassName('yt-uix-button-subscription-container')[0];
+if(subscribeButton == null) {
+    subscribeButton = document.getElementById('subscribe-button');
+}
 
 // Inserting RSS Button
 subscribeButton.innerHTML = subscribeButton.innerHTML + rssButton + contentPopup;
