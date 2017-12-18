@@ -149,13 +149,20 @@ else {
 }
 
 // Getting subscribe button
-var subscribeButton = document.getElementsByClassName('yt-uix-button-subscription-container')[0];
-if(subscribeButton == null) {
-    subscribeButton = document.getElementById('subscribe-button');
+if(isNewVersion == false) {
+    var subscribeButton = document.getElementsByClassName('yt-uix-button-subscription-container')[0];
+}
+else {
+    var subscribeButton = document.getElementById('subscribe-button');
 }
 
 // Inserting RSS Button
-subscribeButton.innerHTML = subscribeButton.innerHTML + rssButton + contentPopup;
+if(isNewVersion == false) {
+    subscribeButton.innerHTML = subscribeButton.innerHTML + rssButton + contentPopup;
+}
+else {
+    subscribeButton.innerHTML = rssButton + contentPopup;
+}
 
 // Inserting listeners
 document.getElementById("copyButton").addEventListener("click", function() {
